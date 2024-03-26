@@ -1,0 +1,27 @@
+{{ define "main_video" }}
+{{template "header"}}
+<center>
+{{ range .}}
+<div class = "video">
+    <video width="400" height="300" controls="controls" poster="{{.ImgVideoHref}}">
+        <source src="{{.VideoHref}}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        <a href="{{.VideoHref}}">Скачайте видео</a>.
+   </video>
+    <div>
+        <h3><b>{{.NameVideo}}</b></h3>
+    </div>
+    <div>
+        <h4><i>{{ .AuthorVideoName }}</i></h4>
+    </div>
+    <div>
+        {{ .RangeIntresting }}
+    </div>
+    
+</div>
+
+{{else}}
+    <p>LOX</p>
+{{end}}
+</center>
+{{template "footer"}}
+{{end}}

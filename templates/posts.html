@@ -1,0 +1,11 @@
+{{ define "posts" }}
+{{template "header"}}
+
+{{ range .}}
+<img src="assets/images/{{.HrefImg}}"/>
+{{else}}
+<p>LOX</p>
+{{end}}
+
+{{template "footer"}}
+{{end}}

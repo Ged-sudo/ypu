@@ -1,0 +1,18 @@
+{{ define "vposts" }}
+{{template "header"}}
+
+{{ range .}}
+    <video width="400" height="300" controls="controls">
+        <!-- <source src="assets/video/{{.HrefVid}}" type='video/ogg; codecs="theora, vorbis"'> -->
+        <source src="assets/videos/{{.HrefVid}}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+        <!-- <source src="assets/video/{{.HrefVid}}" type='video/webm; codecs="vp8, vorbis"'> -->
+        Тег video не поддерживается вашим браузером. 
+        <a href="assets/videos/{{.HrefVid}}">Скачайте видео</a>.
+   </video>
+    <p>{{.HrefVid}}</p>
+{{else}}
+    <p>LOX</p>
+{{end}}
+
+{{template "footer"}}
+{{end}}

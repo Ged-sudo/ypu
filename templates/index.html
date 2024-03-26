@@ -1,0 +1,29 @@
+{{ define "index" }}
+{{template "header"}}
+<body>
+    
+    <form
+      enctype="multipart/form-data"
+      action="http://localhost:8080/upload"
+      method="post">
+      <p class = "caption_form"> Выбрать видео для загрузки<br>
+      <input type="file" name="my_file" placeholder="Загрузить видео" class = "resize"/>
+    </p><br>
+    <p class = "caption_form"> Выбрать картинку заглушку для видео<br>
+      <input type="file" name="image_video" placeholder="Картинка на видео" class = "resize"/>
+    </p><br>
+    <p class = "caption_form"> Название видео<br>
+      <input type="text" name="video_name" placeholder="Название видео" class = "resize"/>
+    </p><br>
+    <p class = "caption_form"> Кто Автор видео<br>
+      <input type="text" name="author" placeholder="Автор видео" class = "resize"/>
+    </p>
+    <p class = "caption_form">Указать теги<br>
+      <input type="text" name="range_intresting"placeholder="Интересы связанные с видео" class = "resize"/>
+    </p>  <br>
+      <input type="submit" value="Загрузить" class = "resize"/>
+
+    </form>
+</body>
+{{template "footer"}}
+{{end}}
