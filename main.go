@@ -114,13 +114,13 @@ func uploadFile(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Wrong data was input")
 	} else {
 
-		db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:33060)/VideoHosting")
+		db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/VideoHosting")
 		if err != nil {
 			panic(err)
 		}
 		defer db.Close()
 
-		insert, err := db.Query(fmt.Sprintf("INSERT INTO Video(video_href, img_video_href, name_video, author_video_name, range_intresting) VALUES('%s', '%s', '%s', '%s', '%s');", video_href, img_video_href, nameVideo, authorVideo, rangeIntresting))
+		insert, err := db.Query(fmt.Sprintf("INSERT INTO Videos(video_href, img_video_href, name_video, author_video_name, range_intresting) VALUES('%s', '%s', '%s', '%s', '%s');", video_href, img_video_href, nameVideo, authorVideo, rangeIntresting))
 		if err != nil {
 			panic(err)
 		}
@@ -209,13 +209,13 @@ func mainVideos(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 
-	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:33060)/VideoHosting")
+	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:3306)/VideoHosting")
 	if err != nil {
 		panic(err.Error())
 	}
 	defer db.Close()
 
-	res, err := db.Query("SELECT * FROM Video")
+	res, err := db.Query("SELECT * FROM Videos")
 	if err != nil {
 		panic(err.Error())
 	}
@@ -232,6 +232,9 @@ func mainVideos(w http.ResponseWriter, r *http.Request) {
 
 	temp.ExecuteTemplate(w, "main_video", data)
 
+}
+func succesUpload(w http.ResponseWriter, r *http.Request) {
+    
 }
 
 func setupRoutes() {
