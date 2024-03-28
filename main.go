@@ -114,7 +114,7 @@ func uploadFile(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintf(w, "Wrong data was input")
 	} else {
 
-		db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:8889)/VideoHosting")
+		db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:33060)/VideoHosting")
 		if err != nil {
 			panic(err)
 		}
@@ -209,7 +209,7 @@ func mainVideos(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 
-	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:8889)/VideoHosting")
+	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:33060)/VideoHosting")
 	if err != nil {
 		panic(err.Error())
 	}
