@@ -127,7 +127,7 @@ func uploadFile(w http.ResponseWriter, r *http.Request) {
 
 		defer insert.Close()
 
-		http.Redirect(w, r, "/", http.StatusSeeOther)
+		http.Redirect(w, r, "/upload_succes", http.StatusSeeOther)
 	}
 
 	fmt.Fprintf(w, "Successfully Uploaded File\n")
@@ -234,7 +234,19 @@ func mainVideos(w http.ResponseWriter, r *http.Request) {
 
 }
 func succesUpload(w http.ResponseWriter, r *http.Request) {
-    
+	temp, err := template.ParseFiles("templates/succes.html", "templates/header.html", "templates/footer.html")
+	if err != nil {
+		panic(err.Error())
+	}
+	temp.ExecuteTemplate(w, "succ", nil)
+}
+
+func koren(w http.ResponseWriter, r *http.Request) {
+	temp, err := template.ParseFiles("templates/koren.html", "templates/header.html", "templates/footer.html")
+	if err != nil {
+		panic(err.Error())
+	}
+	temp.ExecuteTemplate(w, "koren", nil)
 }
 
 func setupRoutes() {
@@ -245,6 +257,8 @@ func setupRoutes() {
 	rtr.HandleFunc("/upload_video", mainPage)
 	rtr.HandleFunc("/posts", posts)
 	rtr.HandleFunc("/vposts", vposts)
+	rtr.HandleFunc("/upload_succes", succesUpload)
+	rtr.HandleFunc("/", koren)
 
 	http.Handle("/", rtr)
 	http.Handle("/assets/", http.StripPrefix("/assets/", http.FileServer(http.Dir("./assets"))))
