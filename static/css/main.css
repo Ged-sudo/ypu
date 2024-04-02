@@ -1,12 +1,12 @@
 .container {
     width: 100%;
     height: 90px;
-    background-color: black;
+    background-color: rgb(22, 22, 22);
     background-size: cover;
     background-position: center;
 }
 html {
-    background-color: grey;
+    background-color: rgb(35, 35, 35);
 }
 
 .caption_form  {
@@ -37,7 +37,7 @@ html {
     display: inline-block;
     margin-left: 10px;  
     margin-top: 5px;
-    
+    margin-bottom: 5px;
 }
 
 .menue {
@@ -49,6 +49,7 @@ html {
     border: 10px;
     width: 60px;
     cursor: pointer;
+    width: fit-content;
 }
 
 nav {
@@ -68,4 +69,8 @@ nav ul li a {
     font-size: 20px;
 }
 
-
+.page_video {
+    width: 70%;
+    float: left;
+    margin-left: 12px;
+}

@@ -1,16 +1,14 @@
 {{ define "video_view" }}
     {{ template "header" }}
-        
-            <div class = "video">
-                 <video width="1200" height="600" controls="controls" poster="{{.ImgVideoHref}}">
+            <div class = "page_video">
+                 <video width="70%" height="50%" controls="controls" poster="{{.ImgVideoHref}}">
                  <source src="{{.VideoHref}}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                  <a href="{{.VideoHref}}">Скачайте видео</a>.
                  </video>
             <div>
                 <div class="video_name">{{.NameVideo}}</div>
                 {{ .AuthorVideoName }}
-                {{ .RangeIntresting }}
-                </div>   
+                </div>
             </div>
     {{ template "footer" }}
 {{ end }}

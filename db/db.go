@@ -46,7 +46,7 @@ func SpeshVideo() []dbdata.VideoData {
 	}
 	defer db.Close()
 
-	res, err := db.Query("SELECT * FROM %s", nameTable)
+	res, err := db.Query(fmt.Sprintf("SELECT * FROM %s", nameTable))
 	if err != nil {
 		panic(err.Error())
 	}
