@@ -1,16 +1,16 @@
-package handlers
+package dbdata
 
-type igmHrefs struct {
+type IgmHrefs struct {
 	HrefImg string
 	Author  string
 }
 
-type vidHrefs struct {
+type VidHrefs struct {
 	HrefVid string
 	Author  string
 }
 
-type videoData struct {
+type VideoData struct {
 	Id              uint16
 	VideoHref       string
 	ImgVideoHref    string

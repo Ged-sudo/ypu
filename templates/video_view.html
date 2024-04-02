@@ -1,10 +1,10 @@
-{{ define "main_video" }}
+{{ define "video_view" }}
 {{template "header"}}
 
 {{ range .}}
-<a href = "video_view/{{.Id}}">
+
 <div class = "video">
-    <video width="400" height="300" controls="controls" poster="{{.ImgVideoHref}}">
+    <video width="1200" height="800" controls="controls" poster="{{.ImgVideoHref}}">
         <source src="{{.VideoHref}}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
         <a href="{{.VideoHref}}">Скачайте видео</a>.
    </video>

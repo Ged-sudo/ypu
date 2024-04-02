@@ -26,6 +26,12 @@ html {
     margin: 20px;
 }
 
+.video_name {
+    font-style: bold;
+    font-size: 50px;
+    background-color: azure;
+}
+
 .logo_main {
     list-style: none;
     display: inline-block;
@@ -61,3 +67,5 @@ nav ul li a {
     color: whitesmoke;
     font-size: 20px;
 }
+
+

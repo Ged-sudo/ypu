@@ -15,6 +15,7 @@ func Routing() {
 	rtr.HandleFunc("/posts", posts)
 	rtr.HandleFunc("/vposts", vposts)
 	rtr.HandleFunc("/upload_succes", succesUpload)
+	rtr.HandleFunc("/video_view/{id:[0-9]+}", video_view)
 	rtr.HandleFunc("/", koren)
 
 	http.Handle("/", rtr)

@@ -118,7 +118,7 @@ func uploadFile(w http.ResponseWriter, r *http.Request) {
 	if nameVideo == "" || authorVideo == "" || rangeIntresting == "" {
 		fmt.Fprintf(w, "Wrong data was input")
 	} else {
-
+		//TODO: add in db file this code
 		db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:8889)/VideoHosting")
 		if err != nil {
 			panic(err)
@@ -131,7 +131,7 @@ func uploadFile(w http.ResponseWriter, r *http.Request) {
 		}
 
 		defer insert.Close()
-
+		// TODO: end code
 		http.Redirect(w, r, "/upload_succes", http.StatusSeeOther)
 	}
 

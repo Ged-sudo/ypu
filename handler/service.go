@@ -1,13 +1,15 @@
 package handlers
 
 import (
-	"database/sql"
 	"fmt"
 	"html/template"
+	"main/db"
+	dbdata "main/dbData"
 	"net/http"
 	"os"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/gorilla/mux"
 )
 
 func mainPage(w http.ResponseWriter, r *http.Request) {
@@ -19,14 +21,29 @@ func mainPage(w http.ResponseWriter, r *http.Request) {
 	t.ExecuteTemplate(w, "index", nil)
 }
 
+func video_view(w http.ResponseWriter, r *http.Request) {
+	id := mux.Vars(r)
+	t, err := template.ParseFiles("../templates/video_view.html", "../templates/header.html", "../templates/footer.html")
+	if err != nil {
+		panic(err.Error())
+	}
+	a := id["id"]
+	fmt.Println("---------id---------")
+	fmt.Println(a)
+	fmt.Println("---------id---------")
+	videoInfo := db.CurrentVideo(a)
+
+	t.ExecuteTemplate(w, "video_view", videoInfo)
+}
+
 func posts(w http.ResponseWriter, r *http.Request) {
 
-	t, err := template.ParseFiles("templates/posts.html", "templates/header.html", "templates/footer.html")
+	t, err := template.ParseFiles("../templates/posts.html", "../templates/header.html", "../templates/footer.html")
 	if err != nil {
 		panic(err.Error())
 	}
 
-	dir, err := os.Open("./assets/images")
+	dir, err := os.Open("../assets/images")
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -39,9 +56,9 @@ func posts(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	var linkImg = []igmHrefs{}
+	var linkImg = []dbdata.IgmHrefs{}
 	for _, file := range files {
-		var name igmHrefs
+		var name dbdata.IgmHrefs
 		name.HrefImg = file.Name()
 		linkImg = append(linkImg, name)
 	}
@@ -57,7 +74,7 @@ func vposts(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 
-	dir, err := os.Open("/Users/evgenii/Desktop/GolangPAth/GoTestEducation/ypu/assets/videos") // /Users/evgenii/Desktop/GolangPAth/GoTestEducation/ypu/assets/videos
+	dir, err := os.Open("../assets/videos") // /Users/evgenii/Desktop/GolangPAth/GoTestEducation/ypu/assets/videos
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -69,9 +86,9 @@ func vposts(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 		return
 	}
-	var linkVid = []vidHrefs{}
+	var linkVid = []dbdata.VidHrefs{}
 	for _, file := range files {
-		var name vidHrefs
+		var name dbdata.VidHrefs
 		name.HrefVid = file.Name()
 		linkVid = append(linkVid, name)
 	}
@@ -79,39 +96,8 @@ func vposts(w http.ResponseWriter, r *http.Request) {
 	t.ExecuteTemplate(w, "vposts", linkVid)
 }
 
-var data = []videoData{}
+var data = []dbdata.VideoData{}
 
-func mainVideos(w http.ResponseWriter, r *http.Request) {
-	// templates/footer.html
-	temp, err := template.ParseFiles("../templates/main_video.html", "../templates/header.html", "../templates/footer.html")
-	if err != nil {
-		panic(err.Error())
-	}
-
-	db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:8889)/VideoHosting")
-	if err != nil {
-		panic(err.Error())
-	}
-	defer db.Close()
-
-	res, err := db.Query("SELECT * FROM Video")
-	if err != nil {
-		panic(err.Error())
-	}
-
-	data = []videoData{}
-	for res.Next() {
-		var dataVideo videoData
-		err = res.Scan(&dataVideo.Id, &dataVideo.VideoHref, &dataVideo.ImgVideoHref, &dataVideo.NameVideo, &dataVideo.AuthorVideoName, &dataVideo.RangeIntresting)
-		if err != nil {
-			panic(err.Error())
-		}
-		data = append(data, dataVideo)
-	}
-
-	temp.ExecuteTemplate(w, "main_video", data)
-
-}
 func succesUpload(w http.ResponseWriter, r *http.Request) {
 	temp, err := template.ParseFiles("../templates/succes.html", "../templates/header.html", "../templates/footer.html")
 	if err != nil {
