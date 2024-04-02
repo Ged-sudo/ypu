@@ -3,6 +3,7 @@ package handlers
 import (
 	"fmt"
 	"html/template"
+	"log"
 	"main/db"
 	dbdata "main/dbData"
 	"net/http"
@@ -12,7 +13,8 @@ import (
 	"github.com/gorilla/mux"
 )
 
-func mainPage(w http.ResponseWriter, r *http.Request) {
+func uploadVideoF(w http.ResponseWriter, r *http.Request) {
+	log.Println("User on upload page (uploadVideoF)")
 	t, err := template.ParseFiles("../templates/index.html", "../templates/header.html", "../templates/footer.html")
 	if err != nil {
 		panic(err.Error())
@@ -21,23 +23,22 @@ func mainPage(w http.ResponseWriter, r *http.Request) {
 	t.ExecuteTemplate(w, "index", nil)
 }
 
-func video_view(w http.ResponseWriter, r *http.Request) {
+func videoView(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)
+	log.Printf("User on current video page (videoView) id = %s", id["id"])
+
 	t, err := template.ParseFiles("../templates/video_view.html", "../templates/header.html", "../templates/footer.html")
 	if err != nil {
 		panic(err.Error())
 	}
 	a := id["id"]
-	fmt.Println("---------id---------")
-	fmt.Println(a)
-	fmt.Println("---------id---------")
 	videoInfo := db.CurrentVideo(a)
 
 	t.ExecuteTemplate(w, "video_view", videoInfo)
 }
 
 func posts(w http.ResponseWriter, r *http.Request) {
-
+	log.Println("Check all imgs in path (posts)")
 	t, err := template.ParseFiles("../templates/posts.html", "../templates/header.html", "../templates/footer.html")
 	if err != nil {
 		panic(err.Error())
@@ -67,8 +68,8 @@ func posts(w http.ResponseWriter, r *http.Request) {
 }
 
 func vposts(w http.ResponseWriter, r *http.Request) {
-	// templates/posts.html
-	// assets
+	log.Println("Check videos in path(vposts)")
+
 	t, err := template.ParseFiles("../templates/posts.html", "../templates/header.html", "../templates/footer.html")
 	if err != nil {
 		panic(err.Error())
@@ -99,6 +100,7 @@ func vposts(w http.ResponseWriter, r *http.Request) {
 var data = []dbdata.VideoData{}
 
 func succesUpload(w http.ResponseWriter, r *http.Request) {
+	log.Println("User on succes upload page (succesUpload)")
 	temp, err := template.ParseFiles("../templates/succes.html", "../templates/header.html", "../templates/footer.html")
 	if err != nil {
 		panic(err.Error())
@@ -107,6 +109,7 @@ func succesUpload(w http.ResponseWriter, r *http.Request) {
 }
 
 func koren(w http.ResponseWriter, r *http.Request) {
+	log.Println("User '/' (koren)")
 	temp, err := template.ParseFiles("../templates/koren.html", "../templates/header.html", "../templates/footer.html")
 	if err != nil {
 		panic(err.Error())

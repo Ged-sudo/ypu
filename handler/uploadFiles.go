@@ -1,9 +1,9 @@
 package handlers
 
 import (
-	"database/sql"
 	"fmt"
 	"io/ioutil"
+	"main/db"
 	"net/http"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -118,20 +118,12 @@ func uploadFile(w http.ResponseWriter, r *http.Request) {
 	if nameVideo == "" || authorVideo == "" || rangeIntresting == "" {
 		fmt.Fprintf(w, "Wrong data was input")
 	} else {
-		//TODO: add in db file this code
-		db, err := sql.Open("mysql", "root:root@tcp(127.0.0.1:8889)/VideoHosting")
-		if err != nil {
-			panic(err)
-		}
-		defer db.Close()
-
-		insert, err := db.Query(fmt.Sprintf("INSERT INTO Video(video_href, img_video_href, name_video, author_video_name, range_intresting) VALUES('%s', '%s', '%s', '%s', '%s');", video_href, img_video_href, nameVideo, authorVideo, rangeIntresting))
-		if err != nil {
-			panic(err)
-		}
-
-		defer insert.Close()
-		// TODO: end code
+		db.AddVideoToDB(video_href,
+			img_video_href,
+			nameVideo,
+			authorVideo,
+			rangeIntresting,
+		)
 		http.Redirect(w, r, "/upload_succes", http.StatusSeeOther)
 	}
 

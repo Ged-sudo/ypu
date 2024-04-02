@@ -11,11 +11,11 @@ func Routing() {
 	rtr := mux.NewRouter()
 	rtr.HandleFunc("/videos", mainVideos)
 	rtr.HandleFunc("/upload", uploadFile).Methods("POST")
-	rtr.HandleFunc("/upload_video", mainPage)
+	rtr.HandleFunc("/upload_video", uploadVideoF)
 	rtr.HandleFunc("/posts", posts)
 	rtr.HandleFunc("/vposts", vposts)
 	rtr.HandleFunc("/upload_succes", succesUpload)
-	rtr.HandleFunc("/video_view/{id:[0-9]+}", video_view)
+	rtr.HandleFunc("/video_view/{id:[0-9]+}", videoView)
 	rtr.HandleFunc("/", koren)
 
 	http.Handle("/", rtr)

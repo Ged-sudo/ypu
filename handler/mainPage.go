@@ -2,13 +2,14 @@ package handlers
 
 import (
 	"html/template"
+	"log"
 	"main/db"
 	dbdata "main/dbData"
 	"net/http"
 )
 
 func mainVideos(w http.ResponseWriter, r *http.Request) {
-	// templates/footer.html
+	log.Println("User main video page (mainVideos)")
 	temp, err := template.ParseFiles("../templates/main_video.html", "../templates/header.html", "../templates/footer.html")
 	if err != nil {
 		panic(err.Error())
