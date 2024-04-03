@@ -1,7 +1,7 @@
 {{ define "video_view" }}
     {{ template "header" }}
             <div class = "page_video">
-                 <video width="70%" height="50%" controls="controls" poster="{{.ImgVideoHref}}">
+                 <video width="70%" height="500px" controls="controls" poster="{{.ImgVideoHref}}">
                  <source src="{{.VideoHref}}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
                  <a href="{{.VideoHref}}">Скачайте видео</a>.
                  </video>

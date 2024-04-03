@@ -71,6 +71,7 @@ nav ul li a {
 
 .page_video {
     width: 70%;
+    height: 400px;
     float: left;
     margin-left: 12px;
 }
