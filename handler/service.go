@@ -32,7 +32,10 @@ func videoView(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 	a := id["id"]
-	videoInfo := db.CurrentVideo(a)
+	videoInfo, err := db.CurrentVideo(a)
+	if err != nil {
+		fmt.Printf(err.Error())
+	}
 
 	t.ExecuteTemplate(w, "video_view", videoInfo)
 }

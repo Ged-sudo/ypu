@@ -6,7 +6,7 @@ import (
 	dbdata "main/dbData"
 )
 
-func CurrentVideo(id string) dbdata.VideoData {
+func CurrentVideo(id string) (dbdata.VideoData, error) {
 	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s", user, pass, host, port, nameDB))
 	if err != nil {
 		panic(err.Error())
@@ -34,7 +34,7 @@ func CurrentVideo(id string) dbdata.VideoData {
 		panic(err.Error())
 	}
 
-	return dataVideoOne[0]
+	return dataVideoOne[0], nil
 }
 
 func SpeshVideo() []dbdata.VideoData {
