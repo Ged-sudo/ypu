@@ -1,0 +1,17 @@
+{{ define "manhwa" }}
+{{template "header"}}
+<body>
+
+
+{{.Name}}
+{{range .LinkImgManhwa}}
+{{.}}
+{{else}}
+XYi
+{{end}}
+{{.Capture}}
+
+<p>ASDasdASD</p>
+</body>
+{{template "footer"}}
+{{end}}

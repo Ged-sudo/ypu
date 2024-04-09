@@ -34,7 +34,7 @@ func videoView(w http.ResponseWriter, r *http.Request) {
 	a := id["id"]
 	videoInfo, err := db.CurrentVideo(a)
 	if err != nil {
-		// fmt.Printf(err.Error())
+		fmt.Sprintf(err.Error())
 	}
 
 	t.ExecuteTemplate(w, "video_view", videoInfo)
@@ -118,4 +118,13 @@ func koren(w http.ResponseWriter, r *http.Request) {
 		panic(err.Error())
 	}
 	temp.ExecuteTemplate(w, "koren", nil)
+}
+
+func manhwaDow(w http.ResponseWriter, r *http.Request) {
+	log.Println("User '/ManhwaDow' (ManhwaDow)")
+	temp, err := template.ParseFiles("../templates/uploadManhwa.html", "../templates/header.html", "../templates/footer.html")
+	if err != nil {
+		panic(err.Error())
+	}
+	temp.ExecuteTemplate(w, "uploadManhwa", nil)
 }

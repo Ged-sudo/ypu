@@ -3,12 +3,12 @@
 
 {{ range .}}
 <a href = "video_view/{{.Id}}">
-<div class = "video">
-    <video width="400" height="300" controls="controls" poster="{{.ImgVideoHref}}">
-        <source src="{{.VideoHref}}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-        <!-- <a href="{{.VideoHref}}">Скачайте видео</a>. -->
-   </video>
-<div>
+    <div class = "video">
+        <video width="400" height="300" controls="controls" poster="{{.ImgVideoHref}}">
+            <source src="{{.VideoHref}}" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+            <!-- <a href="{{.VideoHref}}">Скачайте видео</a>. -->
+    </video>
+    <div>
         <div class="video_name">{{.NameVideo}}</div>
         {{ .AuthorVideoName }}
         {{ .RangeIntresting }}

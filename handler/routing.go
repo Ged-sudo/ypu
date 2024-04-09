@@ -16,6 +16,9 @@ func Routing() {
 	rtr.HandleFunc("/vposts", vposts)
 	rtr.HandleFunc("/upload_succes", succesUpload)
 	rtr.HandleFunc("/video_view/{id:[0-9]+}", videoView)
+	rtr.HandleFunc("/manhwa/{name-manhwa}/{capture:[0-9]+}", manhwa)
+	rtr.HandleFunc("/uploadManhwa", uploadManhwa)
+	rtr.HandleFunc("/ManhwaDow", manhwaDow)
 	rtr.HandleFunc("/", koren)
 
 	http.Handle("/", rtr)

@@ -1,0 +1,23 @@
+{{define "uploadManhwa"}}
+{{template "header"}}
+<form
+      enctype="multipart/form-data"
+      action="http://localhost:8080/uploadManhwa"
+      method="post">
+      <p class = "caption_form"> Выбрать видео для загрузки<br>
+      <input type="text" name="name_manhwa" placeholder="Имя манхвы" class = "resize"/>
+    </p><br>
+    <p class = "caption_form"> Выбрать видео для загрузки<br>
+        <input type="text" name="linck" placeholder="Ссылка" class = "resize"/>
+      </p><br>
+    <p class = "caption_form"> Выбрать картинку заглушку для видео<br>
+      <input type="text" name="capture_S" placeholder="Первая глава" class = "resize"/>
+    </p><br>
+    <p class = "caption_form"> Название видео<br>
+      <input type="text" name="capture_E" placeholder="Последняя глава" class = "resize"/>
+    </p><br>
+    <input type="submit" value="Загрузить" class = "resize"/>
+
+    </form>
+{{template "footer"}}
+{{end}}

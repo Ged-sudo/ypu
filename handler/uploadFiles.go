@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"io/ioutil"
 	"main/db"
+	"main/parser"
 	"net/http"
+	"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -141,4 +143,54 @@ func ImgCurrentType(r *http.Request) string {
 	}
 
 	return img_video_href
+}
+
+func uploadManhwa(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("File Upload Endpoint Hit")
+	nameManhwa := r.FormValue("name_manhwa")
+	linck := r.FormValue("linck")
+	captureS := r.FormValue("capture_S")
+	captureE := r.FormValue("capture_E")
+	fmt.Println(linck)
+	// "https://hmanga.org/manga/sextudy-group/глава-" + c + "/?style=list"
+	// "https://hmanga.org/manga/sextudy-group/глава-"
+	cs, err := strconv.Atoi(captureS)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	ce, err := strconv.Atoi(captureE)
+	if err != nil {
+		panic(err.Error())
+	}
+	//https://hmanga.org/wp-content/uploads/WP-manga/data/manga_62e586377a5ce/88a2a885be48b1c09f44dac9637e7153/sexstudy_class_vol01_ch001_p002.jpg
+	//https://hmanga.org/wp-content/uploads/WP-manga/data/manga_62e586377a5ce/ce0adc0dff76caf7e4896cd91c18eb96/sexstudy_class_vol01_ch003_p001.jpg
+	//https://hmanga.org/wp-content/uploads/WP-manga/data/manga_62e586377a5ce/ec281880d63a7de9364f498bd73f8542/sexstudy_class_vol01_ch010_p001.jpg
+	//https://hmanga.org/wp-content/uploads/WP-manga/data/manga_62e586377a5ce/88a2a885be48b1c09f44dac9637e7153/sexstudy_class_vol01_
+	//ch001_p002.jpg
+	if nameManhwa == "" || captureS == "" || captureE == "" || linck == "" {
+		fmt.Fprintf(w, "Wrong data was input")
+	} else {
+		fmt.Println(cs, ce)
+		for s := cs; s < ce; s++ {
+			newS := strconv.Itoa(s)
+			for i := 1; i < 8; i++ {
+				newI := strconv.Itoa(i)
+				pops := fmt.Sprintf(linck+"%s/p/%s", s, i)
+				fmt.Println(pops)
+				path, err := parser.ParseManhwa(pops, strconv.Itoa(s), strconv.Itoa(i))
+				if err != nil {
+					fmt.Println(s, i)
+					break
+				}
+				db.AddManhwaToDB(nameManhwa, path, newS, newI)
+			}
+			// linck = linck + newS + "/?style=list"
+			// fmt.Println(linck)
+			// path := parser.ParseManhwa(linck, s)
+		}
+		http.Redirect(w, r, "/upload_succes", http.StatusSeeOther)
+	}
+
+	fmt.Fprintf(w, "Successfully Uploaded File\n")
 }

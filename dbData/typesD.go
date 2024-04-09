@@ -18,3 +18,17 @@ type VideoData struct {
 	AuthorVideoName string
 	RangeIntresting string
 }
+
+type ManhwaData struct {
+	Id            uint16
+	Name          string
+	LinkImgManhwa []string
+	Capture       string
+}
+
+type ManhwaTData struct {
+	Id              uint16
+	Name            string
+	LincksImgManhwa string
+	Capture         string
+}
